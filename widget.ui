@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="tranText">
      <property name="font">
       <font>
        <pointsize>13</pointsize>

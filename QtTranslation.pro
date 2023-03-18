@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui core5compat network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    translationapi.cpp \
     widget.cpp
 
 HEADERS += \
+    translationapi.h \
     widget.h
 
 FORMS += \

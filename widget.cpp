@@ -1,6 +1,8 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "translationapi.h"
 #include <QPainter>
+#include <QScreen>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -14,7 +16,26 @@ Widget::Widget(QWidget *parent)
 
     // 获取鼠标的位置并移动窗口到该位置
     QPoint pos = QCursor::pos();
+    //优化窗口的弹出
+    QScreen* screen = QGuiApplication::primaryScreen(); // 获取主屏幕对象
+    QRect screenGeometry = screen->geometry(); // 获取屏幕几何信息
+    qDebug()<<"x:"<<screenGeometry.width()<<"y:"<<screenGeometry.height();
+    qDebug()<<"rx:"<<pos.rx()<<"ry:"<<pos.ry();
+    if ( pos.rx() > (screenGeometry.width() - this->width()) )
+    {
+        pos.setX(pos.rx() - this->width());
+    }
+    if ( pos.ry() > (screenGeometry.height() - this->height()) )
+    {
+        pos.setY(pos.ry() - this->height());
+    }
     move(pos);
+
+    //创建翻译的类
+    TranslationApi *tran = new TranslationApi("百度");
+
+    //在文本框中输出译文
+    ui->tranText->setText(tran->translationText);
 }
 
 Widget::~Widget()
